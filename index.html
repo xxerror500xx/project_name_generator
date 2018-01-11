@@ -14,33 +14,6 @@
 
 <body>
   Project Name Generator
-  <script type="text/javascript">
-    // Project names start with an adjective then a Noun traditionaly
-    // nouns, pronouns, verbs, adjectives, adverbs, conjunctions, prepositions, and interjections
-
-    const commonNouns = ["people", "history", "way", "art", "world",
-      "information", "map", "two", "family", "government", "health", "system",
-      "computer", "meat", "year", "thanks", "music", "person", "reading",
-      "method", "data", "food", "understanding", "theory", "law", "bird",
-      "literature"
-    ];
-    const commonAdjectives = ["able", "bad", "best", "better", "big", "black",
-      "certain", "clear", "different", "early", "easy", "economic", "false", "federal",
-      "free", "full", "good", "great", "hard", "high", "human", "important",
-      "international", "large", "late", "little", "local", "long", "low",
-      "major", "military", "national", "new", "old", "only", "other", "political",
-      "possible", "public", "real", "recent", "right", "small", "social",
-      "special", "strong", "sure", "true", "white", "whole", "young"
-    ];
-
-    var getRandomWord = function(wordType) {
-
-      return wordType[Math.floor(Math.random() * wordType.length)];
-    }
-    var generateProjectName = function() {
-      document.getElementById('currentName').innerHTML = getRandomWord(commonAdjectives) + " " + getRandomWord(commonNouns)
-    }
-  </script>
   <form class="projectNameGenerator" action="index.html" method="post">
     <button class="btn btn-primary"type="button" name="button" onclick="generateProjectName();">New Project</button>
   </form>
@@ -49,6 +22,7 @@
   </p>
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="js/master.js" charset="utf-8"></script>
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>

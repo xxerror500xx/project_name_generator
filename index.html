@@ -26,18 +26,21 @@
             <a class="nav-link" href="https://github.com/xxerror500xx">My Repos</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="https://xxerror500xx.github.io/project_name_generator/">This Repo</a>
+            <a class="nav-link" href="https://github.com/xxerror500xx/project_name_generator">This Repo</a>
           </li>
         </ul>
       </div>
     </div>
   </nav>
-  <form class="projectNameGenerator" action="index.html" method="post">
-    <button class="btn btn-primary"type="button" name="button" onclick="generateProjectName();">New Project</button>
-  </form>
-  <p id="projectNames">
-    Project: <h1 id="currentName"></h1>
-  </p>
+  <div class="container">
+    <form class="projectNameGenerator" action="index.html" method="post">
+      <button class="btn btn-primary" type="button" name="button" onclick="generateProjectName();">New Project</button>
+    </form>
+    <p id="projectNames">
+      Project:
+      <h3 id="currentName"></h3>
+    </p>
+  </div>
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="js/master.js" charset="utf-8"></script>

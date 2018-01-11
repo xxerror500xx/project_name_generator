@@ -34,12 +34,15 @@
   </nav>
   <div class="container">
     <form class="projectNameGenerator" action="index.html" method="post">
-      <button class="btn btn-primary" type="button" name="button" onclick="generateProjectName();">New Project</button>
     </form>
-    <p id="projectNames">
-      Project:
-      <h3 id="currentName"></h3>
-    </p>
+    <div class="card" style="width: 50%">
+      <div class="card-block">
+        <h4 class="card-title">Project:</h4>
+        <h6 class="card-subtitle mb-2 text-muted" id="currentName"></h6>
+        <p class="card-text" id="currentName"></p>
+        <button class="btn btn-primary" type="button" name="button" onclick="generateProjectName();">New Project</button>
+      </div>
+    </div>
   </div>
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->

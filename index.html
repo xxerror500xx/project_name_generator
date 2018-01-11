@@ -2,18 +2,36 @@
 <html lang="en">
 
 <head>
-  <title>Study: "this" keyword</title>
+  <title>Project: Name Generator</title>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/main.css" charset="utf-8">
 
 </head>
 
 <body>
-  Project Name Generator
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">Project Name Generator</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/xxerror500xx">My Repos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://xxerror500xx.github.io/project_name_generator/">This Repo</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
   <form class="projectNameGenerator" action="index.html" method="post">
     <button class="btn btn-primary"type="button" name="button" onclick="generateProjectName();">New Project</button>
   </form>

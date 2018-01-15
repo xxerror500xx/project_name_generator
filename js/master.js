@@ -51,22 +51,35 @@ $(document).ready(function() {
     return word.charAt(0).toUpperCase() + word.slice(1);
   };
 
-  var getListStatsAdj = function() {
+  var showListStatsAdj = function() {
     $('#numAdj').text(adjectives.length);
   };
-  var getListStatsNoun = function() {
+  var showListStatsNoun = function() {
     $('#numNouns').text(nouns.length);
   };
   var generateProjectName = $('#newProjectName').click(function(event) {
     $('#currentName').text(capitalizeFirstLetter(getRandomWord(adjectives).value) + " " + getRandomWord(nouns).value);
   });
   var showWordList = function() {
-
+    adjectives.forEach(function(adjective, index) {
+      if (index === 0) {
+        $('#adjectives').append(adjective.value);
+      } else {
+        $('#adjectives').append(", " + adjective.value)
+      }
+    })
+    nouns.forEach(function(noun, index) {
+      if (index === 0) {
+        $('#nouns').append(noun.value);
+      } else {
+        $('#nouns').append(", " + noun.value)
+      }
+    })
   };
 
   var onLoad = function() {
-    getListStatsAdj();
-    getListStatsNoun();
+    showListStatsAdj();
+    showListStatsNoun();
     showWordList();
   };
 });

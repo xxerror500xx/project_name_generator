@@ -1,38 +1,72 @@
-// Project names start with an adjective then a Noun traditionaly
-// nouns, pronouns, verbs, adjectives, adverbs, conjunctions, prepositions, and interjections
+$(document).ready(function() {
+  var adjectives = [];
+  var nouns = [];
+  var setDefaultShortList = function() {
+    adjectives = [{
+      "value": "able"
+    }, {
+      "value": "bad"
+    }, {
+      "value": "best"
+    }, {
+      "value": "better"
+    }];
 
-const commonAdjectives = ["able", "bad", "best", "better", "big", "black",
-  "certain", "clear", "different", "early", "easy", "economic", "false", "federal",
-  "free", "full", "good", "great", "hard", "high", "human", "important",
-  "international", "large", "late", "little", "local", "long", "low",
-  "major", "military", "national", "new", "old", "only", "other", "political",
-  "possible", "public", "real", "recent", "right", "small", "social",
-  "special", "strong", "sure", "true", "white", "whole", "young"
-];
-const commonNouns = ["people", "history", "way", "art", "world",
-  "information", "map", "two", "family", "government", "health", "system",
-  "computer", "meat", "year", "thanks", "music", "person", "reading",
-  "method", "data", "food", "understanding", "theory", "law", "bird",
-  "literature"
-];
-var getRandomWord = function(wordType) {
-  return wordType[Math.floor(Math.random() * wordType.length)];
-};
-var capitalizeFirstLetter = function(word) {
-  return word.charAt(0).toUpperCase() + word.slice(1);
-};
+    nouns = [{
+      "value": "people"
+    }, {
+      "value": "history"
+    }, {
+      "value": "way"
+    }, {
+      "value": "art"
+    }];
+  };
+  $.ajax({
+    type: "POST",
+    contentType: "application/json",
+    url: "wordlists/common.json",
+    dataType: "json",
+    success: function(data) {
+      adjectives = data.adjectives;
+      nouns = data.nouns;
+      setListName(data.listName);
+      onLoad();
+    },
+    error: function(result) {
+      setDefaultShortList();
+      onLoad();
+      console.log("Error: unable access common.json");
+    }
+  });
 
-var getListStatsAdj = function() {
-  document.getElementById('numAdj').innerHTML = commonAdjectives.length;
-};
-var getListStatsNoun = function() {
-  document.getElementById('numNouns').innerHTML = commonNouns.length;
-};
-var generateProjectName = function() {
-  document.getElementById('currentName').innerHTML = capitalizeFirstLetter(getRandomWord(commonAdjectives)) + " " + getRandomWord(commonNouns);
-};
-var onLoad = function() {
-  getListStatsAdj();
-  getListStatsNoun();
-}
-onLoad();
+
+  var setListName = function(listName) {
+    $('#currWordList').text(listName);
+  };
+  var getRandomWord = function(wordType) {
+    return wordType[Math.floor(Math.random() * wordType.length)];
+  };
+  var capitalizeFirstLetter = function(word) {
+    return word.charAt(0).toUpperCase() + word.slice(1);
+  };
+
+  var getListStatsAdj = function() {
+    $('#numAdj').text(adjectives.length);
+  };
+  var getListStatsNoun = function() {
+    $('#numNouns').text(nouns.length);
+  };
+  var generateProjectName = $('#newProjectName').click(function(event) {
+    $('#currentName').text(capitalizeFirstLetter(getRandomWord(adjectives).value) + " " + getRandomWord(nouns).value);
+  });
+  var showWordList = function() {
+
+  };
+
+  var onLoad = function() {
+    getListStatsAdj();
+    getListStatsNoun();
+    showWordList();
+  };
+});

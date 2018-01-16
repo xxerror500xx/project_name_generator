@@ -33,10 +33,19 @@
     </div>
   </nav>
   <div class="container">
-    <form class="projectNameGenerator" action="index.html" method="post">
-    </form>
     <p>
-      Current word list: <span id="currWordList">Common short list (boring)</span>
+      <div class="dropdown">
+        Current word list:
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="currWordList" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Common short list (boring)
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="#">Common short list (boring)</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item disabled" href="#">Custom list</a>
+        </div>
+      </div>
     </p>
     <table class="table">
       <thead>
@@ -69,18 +78,34 @@
         <button class="btn btn-primary" type="button" name="button" id="newProjectName">New Project</button>
       </div>
     </div>
-    <div class="card">
-      <div class="card-block">
-        <h6 class="card-title">Adjective List:
-        </h6>
-        <p class="card-text" id="adjectives"></p>
+    <div id="accordion" role="tablist" aria-multiselectable="true">
+      <div class="card">
+        <div class="card-header" role="tab" id="headingOne">
+          <h5 class="mb-0">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+              Adjective List:
+            </a>
+          </h5>
+        </div>
+        <div id="collapseOne" class="collapse" role="tabpanel" aria-labelledby="headingOne">
+          <div class="card-block">
+            <p class="card-text" id="adjectives"></p>
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="card">
-      <div class="card-block">
-        <h6 class="card-title">Noun List:
-        </h6>
-        <p class="card-text" id="nouns"></p>
+      <div class="card">
+        <div class="card-header" role="tab" id="headingTwo">
+          <h5 class="mb-0">
+            <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+              Noun List:
+            </a>
+          </h5>
+        </div>
+        <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo">
+          <div class="card-block">
+            <p class="card-text" id="nouns"></p>
+          </div>
+        </div>
       </div>
     </div>
   </div>

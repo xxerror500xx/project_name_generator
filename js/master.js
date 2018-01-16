@@ -60,6 +60,7 @@ $(document).ready(function() {
   };
   var generateProjectName = $('#newProjectName').click(function(event) {
     $('#currentName').text(capitalizeFirstLetter(getRandomWord(adjectives).value) + " " + getRandomWord(nouns).value);
+    rateProjectName();
   });
   var showWordList = function() {
     adjectives.forEach(function(adjective, index) {
@@ -77,7 +78,14 @@ $(document).ready(function() {
       }
     });
   };
+  var rateProjectName = function(){
+    var previousProjectRating = $('#projectRating').rateit('value');
+    $('#rate').attr('class','visible');
 
+    $('#projectRating').rateit('reset')
+    console.log(previousProjectRating);
+    // $('#rate').rateit('value', 0);
+  }
   var onLoad = function() {
     showListStatsAdj();
     showListStatsNoun();

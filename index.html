@@ -9,6 +9,7 @@
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
   <link rel="stylesheet" href="css/main.css" charset="utf-8">
+  <link rel="stylesheet" href="css/rateit.css" charset="utf-8">
 
 </head>
 
@@ -75,12 +76,9 @@
           <span class="card-subtitle mb-2" id="currentName"></span>
         </h4>
         <span>Please rate this project name:</span>
-        <span class="badge badge-default">Boring!</span>
-        <span class="badge badge-primary">Ok!</span>
-        <span class="badge badge-success">Love It!</span>
-        <span class="badge badge-info">Meh...</span>
-        <span class="badge badge-warning">Awkward...</span>
-        <span class="badge badge-danger">BAD!!</span>
+
+         <div class="rateit" data-rateit-mode="font"  style="font-size:20px">
+       </div>
         <hr>
         <button class="btn btn-primary" type="button" name="button" id="newProjectName">New Project</button>
       </div>
@@ -119,6 +117,7 @@
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha384-xBuQ/xzmlsLoJpyjoggmTEz8OWUFM0/RC5BsqQBDX2v5cMvDHcMakNTNrHIW2I5f" crossorigin="anonymous"></script>
+  <script src="js/rateit.js" charset="utf-8"></script>
   <script src="js/master.js" charset="utf-8"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>

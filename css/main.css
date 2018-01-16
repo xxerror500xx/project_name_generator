@@ -13,6 +13,9 @@ body {
 .card {
   margin: 5px;
 }
+.card .rateit {
+  word-wrap: normal;
+}
 .card-block {
   margin: 10px;
 }

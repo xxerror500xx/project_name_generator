@@ -1,7 +1,12 @@
 $(document).ready(function() {
+  var wordLists = ["Common sample list (boring and short)","Most common english words"]; // this should be set by api call using id's
+  var listID;
+  var listName;
   var adjectives = [];
   var nouns = [];
   var setDefaultShortList = function() {
+    id = 0;
+    listName = "Common sample list (boring and short)";
     adjectives = [{
       "value": "able"
     }, {
@@ -31,7 +36,7 @@ $(document).ready(function() {
     success: function(data) {
       adjectives = data.adjectives;
       nouns = data.nouns;
-      setListName(data.listName);
+      listName = data.listName;
       onLoad();
     },
     error: function(result) {
@@ -42,7 +47,7 @@ $(document).ready(function() {
   });
 
 
-  var setListName = function(listName) {
+  var showCurrentListName = function() {
     $('#currWordList').text(listName);
   };
   var getRandomWord = function(wordType) {
@@ -78,17 +83,27 @@ $(document).ready(function() {
       }
     });
   };
-  var rateProjectName = function(){
+  var rateProjectName = function() {
     var previousProjectRating = $('#projectRating').rateit('value');
-    $('#rate').attr('class','visible');
+    $('#rate').attr('class', 'visible');
 
-    $('#projectRating').rateit('reset')
+    $('#projectRating').rateit('reset');
     console.log(previousProjectRating);
     // $('#rate').rateit('value', 0);
-  }
-  var onLoad = function() {
+  };
+  var populateDropdown = function(){
+    wordLists.forEach(function(listName){
+      $('.dropdown-menu').prepend('<a class="dropdown-item" href="#">' + listName + '</a>');
+    });
+  };
+  var changeList = function() {
+    showCurrentListName();
     showListStatsAdj();
     showListStatsNoun();
     showWordList();
+    populateDropdown();
+  };
+  var onLoad = function() {
+    changeList();
   };
 });

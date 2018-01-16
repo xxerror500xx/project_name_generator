@@ -25,6 +25,7 @@ $(document).ready(function() {
   $.ajax({
     type: "POST",
     contentType: "application/json",
+    mimeType: "application/json",
     url: "wordlists/common.json",
     dataType: "json",
     success: function(data) {
@@ -65,16 +66,16 @@ $(document).ready(function() {
       if (index === 0) {
         $('#adjectives').append(adjective.value);
       } else {
-        $('#adjectives').append(", " + adjective.value)
+        $('#adjectives').append(", " + adjective.value);
       }
-    })
+    });
     nouns.forEach(function(noun, index) {
       if (index === 0) {
         $('#nouns').append(noun.value);
       } else {
-        $('#nouns').append(", " + noun.value)
+        $('#nouns').append(", " + noun.value);
       }
-    })
+    });
   };
 
   var onLoad = function() {

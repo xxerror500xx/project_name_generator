@@ -1,15 +1,5 @@
 $(document).ready(function() {
-  var wordLists = [{
-      id: 0,
-      name: "default",
-      title: "Common sample list (boring and short)"
-    },
-    {
-      id: 1,
-      name: "common",
-      title: "Most common english words"
-    }
-  ]; // this should be set by api call using id's
+  var menu = [];
   var id;
   var name;
   var title;
@@ -17,6 +7,28 @@ $(document).ready(function() {
   var nouns = [];
   var prevID;
 
+  var getMenu = function() {
+    $.ajax({
+      type: "POST",
+      contentType: "application/json",
+      mimeType: "application/json",
+      url: "wordlists/menu.json",
+      dataType: "json",
+      success: function(data) {
+        menu = data;
+        setDropdown();
+      },
+      error: function(result) {
+        console.log("failed to get menu.json");
+        menu = {
+            id: 0,
+            name: "default",
+            title: "Common sample list (boring and short)"
+          };
+          setDropdown();
+      }
+    });
+  };
   var clearList = function() {
     id = "";
     name = "";
@@ -103,11 +115,11 @@ $(document).ready(function() {
     $('#rate').attr('class', 'visible');
 
     $('#projectRating').rateit('reset');
-    console.log(previousProjectRating);
+    // console.log(previousProjectRating);
     // $('#rate').rateit('value', 0);
   };
   var setDropdown = function() {
-    wordLists.forEach(function(list, index) {
+    menu.forEach(function(list, index) {
       if (index === 0) {
         $('.dropdown-menu').prepend('<a class="dropdown-item" id="list-' + list.id + '">' + list.title + '</a>');
         $('#list-' + list.id).on('click', function() {
@@ -116,7 +128,7 @@ $(document).ready(function() {
       } else {
         $('.dropdown-menu').prepend('<a class="dropdown-item" id="list-' + list.id + '" href="#">' + list.title + '</a>');
         $('#list-' + list.id).on('click', function() {
-          getExternalList(list.name);
+          getExternalList(list.fileName);
         });
       }
     });
@@ -156,8 +168,9 @@ $(document).ready(function() {
     showWordList();
   };
   var onLoad = function() {
-    setDropdown();
+    getMenu();
     setDefaultShortList();
   };
   onLoad();
+
 });

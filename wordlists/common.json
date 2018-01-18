@@ -1,6 +1,7 @@
 {
   "id": 1,
-  "listName": "Most common english words",
+  "name": "common",
+  "title": "Most common english words",
   "adjectives": [{
       "value": "different"
     },

@@ -1,12 +1,27 @@
 $(document).ready(function() {
-  var wordLists = ["Common sample list (boring and short)","Most common english words"]; // this should be set by api call using id's
-  var listID;
-  var listName;
+  var wordLists = [{
+      id: 0,
+      name: "default",
+      title: "Common sample list (boring and short)"
+    },
+    {
+      id: 1,
+      name: "common",
+      title: "Most common english words"
+    }
+  ]; // this should be set by api call using id's
+  var id;
+  var name;
+  var title;
   var adjectives = [];
   var nouns = [];
+  var prevID;
+
+
   var setDefaultShortList = function() {
     id = 0;
-    listName = "Common sample list (boring and short)";
+    name = "default";
+    title = "Common sample list (boring and short)";
     adjectives = [{
       "value": "able"
     }, {
@@ -26,47 +41,71 @@ $(document).ready(function() {
     }, {
       "value": "art"
     }];
+    changeList();
+    prevID = id;
   };
-  $.ajax({
-    type: "POST",
-    contentType: "application/json",
-    mimeType: "application/json",
-    url: "wordlists/common.json",
-    dataType: "json",
-    success: function(data) {
-      adjectives = data.adjectives;
-      nouns = data.nouns;
-      listName = data.listName;
-      onLoad();
-    },
-    error: function(result) {
-      setDefaultShortList();
-      onLoad();
-      console.log("Error: unable access common.json");
-    }
-  });
+  var setExternalList = function(data) {
+    id = data.id;
+    name = data.name;
+    title = data.title;
+    adjectives = data.adjectives;
+    nouns = data.nouns;
+    changeList();
+    prevID = id;
+  };
+  var getExternalList = function(name) {
+    $.ajax({
+      type: "POST",
+      contentType: "application/json",
+      mimeType: "application/json",
+      url: "wordlists/" + name + ".json",
+      dataType: "json",
+      success: function(data) {
+        setExternalList(data);
+      },
+      error: function(result) {
+        setDefaultShortList();
+        console.log(result);
+        console.log("Error: unable to access " + this.url);
+      }
+    });
+  };
 
 
-  var showCurrentListName = function() {
-    $('#currWordList').text(listName);
-  };
   var getRandomWord = function(wordType) {
     return wordType[Math.floor(Math.random() * wordType.length)];
   };
   var capitalizeFirstLetter = function(word) {
     return word.charAt(0).toUpperCase() + word.slice(1);
   };
-
-  var showListStatsAdj = function() {
-    $('#numAdj').text(adjectives.length);
-  };
-  var showListStatsNoun = function() {
-    $('#numNouns').text(nouns.length);
-  };
   var generateProjectName = $('#newProjectName').click(function(event) {
     $('#currentName').text(capitalizeFirstLetter(getRandomWord(adjectives).value) + " " + getRandomWord(nouns).value);
     rateProjectName();
   });
+
+  var rateProjectName = function() {
+    var previousProjectRating = $('#projectRating').rateit('value');
+    $('#rate').attr('class', 'visible');
+
+    $('#projectRating').rateit('reset');
+    console.log(previousProjectRating);
+    // $('#rate').rateit('value', 0);
+  };
+  var setDropdown = function() {
+    wordLists.forEach(function(list, index) {
+      if (index === 0) {
+        $('.dropdown-menu').prepend('<a class="dropdown-item" id="list-' + list.id + '">' + list.title + '</a>');
+        $('#list-' + list.id).on('click', function() {
+          setDefaultShortList();
+        });
+      } else {
+        $('.dropdown-menu').prepend('<a class="dropdown-item" id="list-' + list.id + '" href="#">' + list.title + '</a>');
+        $('#list-' + list.id).on('click', function() {
+          getExternalList(list.name);
+        });
+      }
+    });
+  };
   var showWordList = function() {
     adjectives.forEach(function(adjective, index) {
       if (index === 0) {
@@ -83,27 +122,33 @@ $(document).ready(function() {
       }
     });
   };
-  var rateProjectName = function() {
-    var previousProjectRating = $('#projectRating').rateit('value');
-    $('#rate').attr('class', 'visible');
-
-    $('#projectRating').rateit('reset');
-    console.log(previousProjectRating);
-    // $('#rate').rateit('value', 0);
+  var showListStatsAdj = function() {
+    $('#numAdj').text(adjectives.length);
   };
-  var populateDropdown = function(){
-    wordLists.forEach(function(listName){
-      $('.dropdown-menu').prepend('<a class="dropdown-item" href="#">' + listName + '</a>');
-    });
+  var showListStatsNoun = function() {
+    $('#numNouns').text(nouns.length);
+  };
+  var showCurrentListName = function() {
+    $('#currWordList').text(title);
+    console.log(prevID);
+    console.log(id);
+
+    if (prevID) {
+      $('#list-' + id).addClass('active');
+    } else {
+      $('#list-' + prevID).removeClass('active');
+      $('#list-' + id).addClass('active');
+    }
   };
   var changeList = function() {
     showCurrentListName();
     showListStatsAdj();
     showListStatsNoun();
     showWordList();
-    populateDropdown();
   };
   var onLoad = function() {
-    changeList();
+    setDropdown();
+    setDefaultShortList();
   };
+  onLoad();
 });

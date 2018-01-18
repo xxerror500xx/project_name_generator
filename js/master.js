@@ -133,8 +133,11 @@ $(document).ready(function() {
     console.log(prevID);
     console.log(id);
 
-    if (prevID) {
+    if (prevID !== id) {
+      $('#list-' + prevID).removeClass('active');
       $('#list-' + id).addClass('active');
+    } else if (prevID === id) {
+      // do nothing
     } else {
       $('#list-' + prevID).removeClass('active');
       $('#list-' + id).addClass('active');

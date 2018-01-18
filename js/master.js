@@ -17,8 +17,18 @@ $(document).ready(function() {
   var nouns = [];
   var prevID;
 
+  var clearList = function() {
+    id = "";
+    name = "";
+    title = "";
+    adjectives = [];
+    nouns = [];
+    $('#adjectives').text("");
+    $('#nouns').text("");
 
+  };
   var setDefaultShortList = function() {
+    clearList();
     id = 0;
     name = "default";
     title = "Common sample list (boring and short)";
@@ -41,17 +51,22 @@ $(document).ready(function() {
     }, {
       "value": "art"
     }];
-    changeList();
-    prevID = id;
+    if (prevID !== id) {
+      changeList();
+      prevID = id;
+    }
   };
   var setExternalList = function(data) {
+    clearList();
     id = data.id;
     name = data.name;
     title = data.title;
     adjectives = data.adjectives;
     nouns = data.nouns;
-    changeList();
-    prevID = id;
+    if (prevID !== id) {
+      changeList();
+      prevID = id;
+    }
   };
   var getExternalList = function(name) {
     $.ajax({
@@ -130,18 +145,9 @@ $(document).ready(function() {
   };
   var showCurrentListName = function() {
     $('#currWordList').text(title);
-    console.log(prevID);
-    console.log(id);
+    $('#list-' + prevID).removeClass('active');
+    $('#list-' + id).addClass('active');
 
-    if (prevID !== id) {
-      $('#list-' + prevID).removeClass('active');
-      $('#list-' + id).addClass('active');
-    } else if (prevID === id) {
-      // do nothing
-    } else {
-      $('#list-' + prevID).removeClass('active');
-      $('#list-' + id).addClass('active');
-    }
   };
   var changeList = function() {
     showCurrentListName();

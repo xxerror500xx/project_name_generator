@@ -21,11 +21,11 @@ $(document).ready(function() {
       },
       error: function(result) {
         console.log("failed to get menu.json");
-        menu = {
+        menu = [{
           id: 0,
           name: "default",
           title: "Common sample list (boring and short)"
-        };
+        }];
         setDropdown();
         showCurrentListName();
       }

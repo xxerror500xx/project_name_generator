@@ -30,13 +30,8 @@ $(document).ready(function() {
     });
   };
   var clearList = function() {
-    name = "";
-    title = "";
-    adjectives = [];
-    nouns = [];
     $('#adjectives').text("");
     $('#nouns').text("");
-
   };
   var setDefaultShortList = function() {
     id = 0;

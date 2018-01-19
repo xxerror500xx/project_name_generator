@@ -30,7 +30,6 @@ $(document).ready(function() {
     });
   };
   var clearList = function() {
-    id = "";
     name = "";
     title = "";
     adjectives = [];
@@ -40,8 +39,10 @@ $(document).ready(function() {
 
   };
   var setDefaultShortList = function() {
-    clearList();
     id = 0;
+    if (prevID !== id) {
+      clearList();
+    }
     name = "default";
     title = "Common sample list (boring and short)";
     adjectives = [{
@@ -63,7 +64,7 @@ $(document).ready(function() {
     }, {
       "value": "art"
     }];
-    if (prevID !== id) {
+    if (prevID !== id || prevID === undefined) {
       changeList();
       prevID = id;
     }
@@ -162,10 +163,14 @@ $(document).ready(function() {
 
   };
   var changeList = function() {
-    showCurrentListName();
-    showListStatsAdj();
-    showListStatsNoun();
-    showWordList();
+    if (prevID === id) {
+      console.log("dont do a damn thing!");
+    }else {
+      showCurrentListName();
+      showListStatsAdj();
+      showListStatsNoun();
+      showWordList();
+    }
   };
   var onLoad = function() {
     getMenu();

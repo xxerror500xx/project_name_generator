@@ -17,15 +17,17 @@ $(document).ready(function() {
       success: function(data) {
         menu = data;
         setDropdown();
+        showCurrentListName();
       },
       error: function(result) {
         console.log("failed to get menu.json");
         menu = {
-            id: 0,
-            name: "default",
-            title: "Common sample list (boring and short)"
-          };
-          setDropdown();
+          id: 0,
+          name: "default",
+          title: "Common sample list (boring and short)"
+        };
+        setDropdown();
+        showCurrentListName();
       }
     });
   };
@@ -35,9 +37,6 @@ $(document).ready(function() {
   };
   var setDefaultShortList = function() {
     id = 0;
-    if (prevID !== id) {
-      clearList();
-    }
     name = "default";
     title = "Common sample list (boring and short)";
     adjectives = [{
@@ -60,18 +59,19 @@ $(document).ready(function() {
       "value": "art"
     }];
     if (prevID !== id || prevID === undefined) {
+      clearList();
       changeList();
       prevID = id;
     }
   };
   var setExternalList = function(data) {
-    clearList();
     id = data.id;
     name = data.name;
     title = data.title;
     adjectives = data.adjectives;
     nouns = data.nouns;
-    if (prevID !== id) {
+    if (prevID !== id || prevID === undefined) {
+      clearList();
       changeList();
       prevID = id;
     }
@@ -152,15 +152,17 @@ $(document).ready(function() {
     $('#numNouns').text(nouns.length);
   };
   var showCurrentListName = function() {
+
     $('#currWordList').text(title);
+
     $('#list-' + prevID).removeClass('active');
     $('#list-' + id).addClass('active');
 
   };
   var changeList = function() {
     if (prevID === id) {
-      console.log("dont do a damn thing!");
-    }else {
+      console.log("dont do a thing!");
+    } else {
       showCurrentListName();
       showListStatsAdj();
       showListStatsNoun();
@@ -168,8 +170,8 @@ $(document).ready(function() {
     }
   };
   var onLoad = function() {
-    getMenu();
     setDefaultShortList();
+    getMenu();
   };
   onLoad();
 

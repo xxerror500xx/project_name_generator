@@ -2,11 +2,14 @@
   {
     "fileName": "default",
     "id": 0,
-    "title": "Common sample list (boring and short)"
+    "title": "Common sample list (boring and short)",
+    "uri" : ""
+
   },
   {
     "fileName": "common",
     "id": 1,
-    "title": "Most common english words"
+    "title": "Most common english words",
+    "uri" : "https://api.myjson.com/bins/yd6sp"
   }
 ]

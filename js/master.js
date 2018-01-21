@@ -6,30 +6,36 @@ $(document).ready(function() {
   var adjectives = [];
   var nouns = [];
   var prevID;
+  var menuURI = 'https://api.myjson.com/bins/hnc4p'
 
   var getMenu = function() {
-    $.ajax({
-      type: "POST",
-      contentType: "application/json",
-      mimeType: "application/json",
-      url: "wordlists/menu.json",
-      dataType: "json",
-      success: function(data) {
-        menu = data;
-        setDropdown();
-        showCurrentListName();
-      },
-      error: function(result) {
-        console.log("failed to get menu.json");
-        menu = [{
-          id: 0,
-          name: "default",
-          title: "Common sample list (boring and short)"
-        }];
-        setDropdown();
-        showCurrentListName();
-      }
+    $.get(menuURI, function(data, textStatus, jqXHR) {
+      menu = data;
+      setDropdown();
+      showCurrentListName();
     });
+    // $.ajax({
+    //   type: "POST",
+    //   contentType: "application/json",
+    //   mimeType: "application/json",
+    //   url: "wordlists/menu.json",
+    //   dataType: "json",
+    //   success: function(data) {
+    //     menu = data;
+    //     setDropdown();
+    //     showCurrentListName();
+    //   },
+    //   error: function(result) {
+    //     console.log("failed to get menu.json");
+    //     menu = [{
+    //       id: 0,
+    //       name: "default",
+    //       title: "Common sample list (boring and short)"
+    //     }];
+    //     setDropdown();
+    //     showCurrentListName();
+    //   }
+    // });
   };
   var clearList = function() {
     $('#adjectives').text("");
@@ -76,23 +82,27 @@ $(document).ready(function() {
       prevID = id;
     }
   };
-  var getExternalList = function(name) {
-    $.ajax({
-      type: "POST",
-      contentType: "application/json",
-      mimeType: "application/json",
-      url: "wordlists/" + name + ".json",
-      dataType: "json",
-      success: function(data) {
-        setExternalList(data);
-      },
-      error: function(result) {
-        setDefaultShortList();
-        console.log(result);
-        console.log("Error: unable to access " + this.url);
-      }
+  var getExternalList = function(data) {
+    $.get(data.uri, function(listData, textStatus, jqXHR) {
+      setExternalList(listData);
     });
   };
+  //   $.ajax({
+  //     url: data.uri,
+  //     type: "POST",
+  //     contentType: "application/json; charset=utf-8",
+  //     mimeType: "application/json",
+  //     dataType: "json",
+  //     success: function(data) {
+  //       setExternalList(data);
+  //     },
+  //     error: function(result) {
+  //       setDefaultShortList();
+  //       console.log(result);
+  //       console.log("Error: unable to access " + this.url);
+  //     }
+  //   });
+  // };
 
 
   var getRandomWord = function(wordType) {
@@ -124,7 +134,7 @@ $(document).ready(function() {
       } else {
         $('.dropdown-menu').prepend('<a class="dropdown-item" id="list-' + list.id + '" href="#">' + list.title + '</a>');
         $('#list-' + list.id).on('click', function() {
-          getExternalList(list.fileName);
+          getExternalList(list);
         });
       }
     });
